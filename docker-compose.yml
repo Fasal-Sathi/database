@@ -1,0 +1,18 @@
+﻿services:
+  postgres:
+    image: postgres:17
+    container_name: fasal-sathi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: college_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in your environment}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./datasets:/datasets:ro
+      - ./sql:/sql:ro
+
+volumes:
+  postgres_data:
